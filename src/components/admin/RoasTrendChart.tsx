@@ -35,7 +35,7 @@ export function RoasTrendChart() {
         <div>
           <CardTitle>Daily ROAS Trend</CardTitle>
           <CardDescription>
-            Is spend on Meta, TikTok, etc. still paying off?
+            Is spend on platforms still paying off?
           </CardDescription>
         </div>
         <DropdownMenu>
@@ -82,9 +82,10 @@ export function RoasTrendChart() {
                 labelStyle={{ fontWeight: "bold" }}
             />
             <Legend wrapperStyle={{ fontSize: "0.875rem", paddingTop: "20px" }} />
-            <Line type="monotone" dataKey="Meta" stroke="#8884d8" strokeWidth={2} dot={false} activeDot={{ r: 6 }}/>
-            <Line type="monotone" dataKey="TikTok" stroke="#82ca9d" strokeWidth={2} dot={false} activeDot={{ r: 6 }}/>
-            <Line type="monotone" dataKey="Google" stroke="#ffc658" strokeWidth={2} dot={false} activeDot={{ r: 6 }}/>
+            <Line type="monotone" dataKey="Facebook" stroke="#4267B2" strokeWidth={2} dot={false} activeDot={{ r: 6 }}/>
+            <Line type="monotone" dataKey="Instagram" stroke="#E1306C" strokeWidth={2} dot={false} activeDot={{ r: 6 }}/>
+            <Line type="monotone" dataKey="TikTok" stroke="#00f2ea" strokeWidth={2} dot={false} activeDot={{ r: 6 }}/>
+            <Line type="monotone" dataKey="Google" stroke="#FBBC05" strokeWidth={2} dot={false} activeDot={{ r: 6 }}/>
           </LineChart>
         </ResponsiveContainer>
       </CardContent>
