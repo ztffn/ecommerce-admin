@@ -1,3 +1,4 @@
+
 import { Outlet, Link, useLocation } from "react-router-dom";
 import {
   Home,
@@ -34,7 +35,7 @@ export default function AdminLayout() {
     { to: "/admin/roas", icon: DollarSign, text: "ROAS" },
     { to: "/admin/orders", icon: ShoppingCart, text: "Orders", badge: "6" },
     { to: "/admin/products", icon: Package, text: "Products" },
-    { to: "#", icon: Users, text: "Customers" },
+    { to: "/admin/customers", icon: Users, text: "Customers" },
     { to: "#", icon: LineChart, text: "Analytics" },
   ];
 
