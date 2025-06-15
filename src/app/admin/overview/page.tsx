@@ -1,3 +1,6 @@
+
+'use client';
+
 import { CongratulationsCard } from "@/components/admin/CongratulationsCard";
 import { OverviewChart } from "@/components/admin/OverviewChart";
 import { RecentOrders } from "@/components/admin/RecentOrders";
