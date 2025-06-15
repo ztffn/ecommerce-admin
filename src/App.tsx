@@ -11,6 +11,7 @@ import AdminOverview from "./pages/admin/Overview";
 import AdminFunnels from "./pages/admin/Funnels";
 import AdminRoas from "./pages/admin/Roas";
 import AdminOrders from "./pages/admin/Orders";
+import AdminProducts from "./pages/admin/Products";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="funnels" element={<AdminFunnels />} />
             <Route path="roas" element={<AdminRoas />} />
             <Route path="orders" element={<AdminOrders />} />
+            <Route path="products" element={<AdminProducts />} />
           </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

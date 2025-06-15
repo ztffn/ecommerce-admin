@@ -1,4 +1,3 @@
-
 import { Outlet, Link, useLocation } from "react-router-dom";
 import {
   Home,
@@ -34,12 +33,12 @@ export default function AdminLayout() {
     { to: "/admin/funnels", icon: Filter, text: "Funnels" },
     { to: "/admin/roas", icon: DollarSign, text: "ROAS" },
     { to: "/admin/orders", icon: ShoppingCart, text: "Orders", badge: "6" },
-    { to: "#", icon: Package, text: "Products" },
+    { to: "/admin/products", icon: Package, text: "Products" },
     { to: "#", icon: Users, text: "Customers" },
     { to: "#", icon: LineChart, text: "Analytics" },
   ];
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path: string) => location.pathname.startsWith(path);
 
   return (
     <div className="grid min-h-screen w-full grid-cols-[80px_1fr]">
