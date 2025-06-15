@@ -52,7 +52,7 @@ export default function AdminLayout() {
               className="flex items-center justify-center gap-2 font-semibold"
             >
               <Package className="h-6 w-6" />
-              <span className="sr-only">SwiftFrame Inc</span>
+              <span className="sr-only">Webshop Inc</span>
             </Link>
           </div>
           <div className="flex-1 overflow-auto py-2">

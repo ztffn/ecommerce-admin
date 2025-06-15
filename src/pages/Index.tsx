@@ -7,7 +7,7 @@ const Index = () => {
     <div className="min-h-screen flex items-center justify-center bg-background">
       <div className="text-center p-8 max-w-2xl mx-auto">
         <h1 className="text-5xl font-bold mb-4 tracking-tight">
-          SwiftFrame Analytics
+          Webshop Analytics
         </h1>
         <p className="text-xl text-muted-foreground mb-8">
           Welcome to your product profit analysis dashboard. Get insights into
