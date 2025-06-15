@@ -23,9 +23,8 @@ export const customersData: Customer[] = Array.from({ length: 50 }, (_, i) => {
         avatarUrl: `/placeholder.svg`,
         joinDate: joinDate.toISOString(),
         totalOrders: faker.number.int({ min: 1, max: 50 }),
-        totalSpent: faker.number.float({ min: 20, max: 5000, precision: 0.01 }),
+        totalSpent: faker.number.float({ min: 20, max: 5000, fractionDigits: 2 }),
         lastOrderDate: lastOrderDate.toISOString(),
         status: faker.helpers.arrayElement(["Active", "Inactive"]),
     };
 });
-

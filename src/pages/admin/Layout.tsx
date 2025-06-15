@@ -9,6 +9,7 @@ import {
   Filter,
   DollarSign,
   CircleUser,
+  LogOut,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -97,10 +98,12 @@ export default function AdminLayout() {
               <DropdownMenuSeparator />
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem>Support</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+          <Button variant="outline" size="icon" className="rounded-full">
+            <LogOut className="h-5 w-5" />
+            <span className="sr-only">Sign Out</span>
+          </Button>
         </header>
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
           <Outlet />
