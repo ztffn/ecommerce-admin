@@ -10,6 +10,7 @@ import {
   DollarSign,
   CircleUser,
   LogOut,
+  TestTube,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -37,6 +38,7 @@ export default function AdminLayout() {
     { to: "/admin/orders", icon: ShoppingCart, text: "Orders", badge: "6" },
     { to: "/admin/products", icon: Package, text: "Products" },
     { to: "/admin/customers", icon: Users, text: "Customers" },
+    { to: "/admin/experiments", icon: TestTube, text: "A/B Tests" },
     { to: "#", icon: LineChart, text: "Analytics" },
   ];
 
