@@ -1,5 +1,20 @@
 
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  Cell,
+} from "recharts";
 
 const salesData = [
   { country: 'Canada', percentage: 85, change: '+5.2%', changeType: 'increase' },
@@ -10,31 +25,56 @@ const salesData = [
   { country: 'Greece', percentage: 40, change: '+1%', changeType: 'increase' },
 ];
 
+const colors = [
+    '#0ea5e9',
+    '#6366f1',
+    '#f97316',
+    '#22c55e',
+    '#ec4899',
+    '#facc15',
+];
+
 export function SalesByLocation() {
   return (
     <Card>
       <CardHeader>
         <CardTitle>Sales by Location</CardTitle>
-        <CardDescription>Income in the last 28 days</CardDescription>
+        <CardDescription>Your top selling countries.</CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="space-y-4">
-          {salesData.map((item) => (
-            <div key={item.country} className="flex items-center">
-              <div className="flex items-center gap-2 w-1/3">
-                <span className="font-medium">{item.country}</span>
-                <span className={`text-xs ${item.changeType === 'increase' ? 'text-emerald-500 bg-emerald-100 dark:text-emerald-400 dark:bg-emerald-900' : 'text-red-500 bg-red-100 dark:text-red-400 dark:bg-red-900'} px-1.5 py-0.5 rounded-md`}>
-                  {item.change}
-                </span>
-              </div>
-              <div className="flex-1 mx-4">
-                <div className="bg-muted rounded-full h-2">
-                  <div className="bg-primary h-2 rounded-full" style={{ width: `${item.percentage}%` }}></div>
-                </div>
-              </div>
-              <div className="w-12 text-right text-muted-foreground">{item.percentage}%</div>
-            </div>
-          ))}
+        <div className="h-[300px]">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart
+              data={salesData}
+              layout="vertical"
+              margin={{ top: 0, right: 20, left: 0, bottom: 0 }}
+            >
+              <XAxis type="number" hide />
+              <YAxis
+                type="category"
+                dataKey="country"
+                stroke="hsl(var(--muted-foreground))"
+                fontSize={12}
+                tickLine={false}
+                axisLine={false}
+                width={80}
+              />
+              <Tooltip
+                cursor={{ fill: "hsl(var(--muted))" }}
+                contentStyle={{
+                  backgroundColor: "hsl(var(--background))",
+                  borderColor: "hsl(var(--border))",
+                }}
+                formatter={(value: number) => [`${value}%`, 'Sales']}
+                labelStyle={{display: "none"}}
+              />
+              <Bar dataKey="percentage" radius={[0, 4, 4, 0]}>
+                {salesData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
         </div>
       </CardContent>
     </Card>
