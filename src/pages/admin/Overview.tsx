@@ -1,7 +1,7 @@
 
 import { KpiCard } from "@/components/admin/KpiCard";
 import { OverviewChart } from "@/components/admin/OverviewChart";
-import { RecentSales } from "@/components/admin/RecentSales";
+import { RecentOrders } from "@/components/admin/RecentOrders";
 import { DollarSign, Users, CreditCard, Activity } from "lucide-react";
 
 export default function AdminOverview() {
@@ -9,22 +9,22 @@ export default function AdminOverview() {
     <>
       <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
         <KpiCard
-          title="Total Revenue"
-          amount="$45,231.89"
+          title="Revenue"
+          amount="$125,231"
           description="+20.1% from last month"
           icon={DollarSign}
         />
         <KpiCard
-          title="Subscriptions"
-          amount="+2350"
-          description="+180.1% from last month"
-          icon={Users}
+          title="Sales"
+          amount="20K"
+          description="-1.7% from last month"
+          icon={CreditCard}
         />
         <KpiCard
-          title="Sales"
-          amount="+12,234"
-          description="+19% from last month"
-          icon={CreditCard}
+          title="New Customers"
+          amount="3,602"
+          description="+36.5% from last month"
+          icon={Users}
         />
         <KpiCard
           title="Active Now"
@@ -37,7 +37,7 @@ export default function AdminOverview() {
         <div className="xl:col-span-2">
             <OverviewChart />
         </div>
-        <RecentSales />
+        <RecentOrders />
       </div>
     </>
   );

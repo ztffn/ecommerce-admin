@@ -1,14 +1,14 @@
-
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
+  CardDescription,
 } from "@/components/ui/card";
 import {
   ResponsiveContainer,
-  AreaChart,
-  Area,
+  BarChart,
+  Bar,
   XAxis,
   YAxis,
   Tooltip,
@@ -33,34 +33,13 @@ export function OverviewChart() {
   return (
     <Card className="xl:col-span-2">
       <CardHeader>
-        <CardTitle>Overview</CardTitle>
+        <CardTitle>Total Revenue</CardTitle>
+        <CardDescription>Income in the last 28 days</CardDescription>
       </CardHeader>
       <CardContent className="pb-4">
         <div className="h-[350px]">
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart
-              data={data}
-              margin={{
-                top: 5,
-                right: 10,
-                left: 10,
-                bottom: 0,
-              }}
-            >
-              <defs>
-                <linearGradient id="colorTotal" x1="0" y1="0" x2="0" y2="1">
-                  <stop
-                    offset="5%"
-                    stopColor="hsl(var(--primary))"
-                    stopOpacity={0.8}
-                  />
-                  <stop
-                    offset="95%"
-                    stopColor="hsl(var(--primary))"
-                    stopOpacity={0}
-                  />
-                </linearGradient>
-              </defs>
+            <BarChart data={data}>
               <XAxis
                 dataKey="name"
                 stroke="#888888"
@@ -76,19 +55,14 @@ export function OverviewChart() {
                 tickFormatter={(value) => `$${value}`}
               />
               <Tooltip
-                cursor={{ stroke: "hsl(var(--primary))", strokeWidth: 1, strokeDasharray: "3 3" }}
+                cursor={{ fill: "hsl(var(--muted))" }}
                 contentStyle={{
                   backgroundColor: "hsl(var(--background))",
                   borderColor: "hsl(var(--border))",
                 }}
               />
-              <Area
-                type="monotone"
-                dataKey="total"
-                stroke="hsl(var(--primary))"
-                fill="url(#colorTotal)"
-              />
-            </AreaChart>
+              <Bar dataKey="total" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
+            </BarChart>
           </ResponsiveContainer>
         </div>
       </CardContent>
