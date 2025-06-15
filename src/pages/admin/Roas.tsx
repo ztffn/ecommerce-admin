@@ -1,24 +1,16 @@
 
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-    CardDescription,
-} from "@/components/ui/card";
+import { RoasTrendChart } from "@/components/admin/RoasTrendChart";
+import { CampaignLeaderboard } from "@/components/admin/CampaignLeaderboard";
+import { CostRevenueScatter } from "@/components/admin/CostRevenueScatter";
+import { BreakEvenDaysChart } from "@/components/admin/BreakEvenDaysChart";
 
 export default function AdminRoas() {
     return (
-        <Card>
-            <CardHeader>
-                <CardTitle>ROAS (Return on Ad Spend)</CardTitle>
-                <CardDescription>
-                    Track the performance of your ad campaigns. This feature is coming soon.
-                </CardDescription>
-            </CardHeader>
-            <CardContent>
-                <p>ROAS table will be displayed here.</p>
-            </CardContent>
-        </Card>
+        <div className="grid gap-6 lg:grid-cols-12">
+            <RoasTrendChart />
+            <CampaignLeaderboard />
+            <CostRevenueScatter />
+            <BreakEvenDaysChart />
+        </div>
     );
 }
