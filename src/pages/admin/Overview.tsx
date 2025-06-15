@@ -1,6 +1,5 @@
 
 import { CongratulationsCard } from "@/components/admin/CongratulationsCard";
-import { KpiCard } from "@/components/admin/KpiCard";
 import { OverviewChart } from "@/components/admin/OverviewChart";
 import { RecentOrders } from "@/components/admin/RecentOrders";
 import { DollarSign, Users, CreditCard, TrendingUp } from "lucide-react";
@@ -8,29 +7,46 @@ import { SalesByLocation } from "@/components/admin/SalesByLocation";
 import { StoreVisitsBySource } from "@/components/admin/StoreVisitsBySource";
 import { CustomerReviews } from "@/components/admin/CustomerReviews";
 import { BestSellingProducts } from "@/components/admin/BestSellingProducts";
+import { TrendCard } from "@/components/admin/TrendCard";
+
+// Generate dummy data for trend charts
+const generateTrendData = () => {
+  return Array.from({ length: 10 }, (_, i) => ({
+    name: `Point ${i + 1}`,
+    value: Math.floor(Math.random() * 100) + 10,
+  }));
+};
+
+const revenueData = generateTrendData();
+const salesData = generateTrendData();
+const customersData = generateTrendData();
+const returningRateData = generateTrendData();
 
 export default function AdminOverview() {
   return (
     <div className="flex flex-col gap-4 md:gap-8">
       <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
         <CongratulationsCard />
-        <KpiCard
+        <TrendCard
           title="Revenue"
           amount="$125,231"
           description="+20.1% from last month"
           icon={DollarSign}
+          data={revenueData}
         />
-        <KpiCard
+        <TrendCard
           title="Sales"
           amount="20K"
           description="-1.7% from last month"
           icon={CreditCard}
+          data={salesData}
         />
-        <KpiCard
+        <TrendCard
           title="New Customers"
           amount="3,602"
           description="+36.5% from last month"
           icon={Users}
+          data={customersData}
         />
       </div>
 
@@ -38,11 +54,12 @@ export default function AdminOverview() {
         <div className="lg:col-span-2">
             <OverviewChart />
         </div>
-        <KpiCard
+        <TrendCard
           title="Returning Rate"
-          amount="$42,379"
+          amount="87.5%"
           description="+2.5% from last month"
           icon={TrendingUp}
+          data={returningRateData}
         />
       </div>
 
