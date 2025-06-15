@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   Card,
@@ -7,8 +6,9 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
-import { ArrowDown, Check, Users, BarChart } from "lucide-react";
+import { ArrowDown, Check, Users, BarChart, ChevronDown } from "lucide-react";
 import { StepDetails } from "./StepDetails";
+import { Button } from "@/components/ui/button";
 
 type FunnelStep = {
     step: string;
@@ -70,10 +70,16 @@ const funnelData: FunnelStep[] = [
 ];
 
 export function PurchaseFunnelChart() {
+  const [selectedStepIndex, setSelectedStepIndex] = React.useState<number | null>(null);
+
   const totalSessions = funnelData[0]?.value || 0;
   const finalValue = funnelData[funnelData.length - 1]?.value || 0;
   const finalConversionRate =
     totalSessions > 0 ? (finalValue / totalSessions) * 100 : 0;
+
+  const handleToggleDetails = (index: number) => {
+    setSelectedStepIndex(prevIndex => prevIndex === index ? null : index);
+  };
 
   const getPolygonPoints = () => {
     const total = funnelData[0]?.value || 1;
@@ -160,10 +166,21 @@ export function PurchaseFunnelChart() {
             
             <div className="grid" style={{ gridTemplateColumns: `repeat(${funnelData.length}, minmax(0, 1fr))` }}>
               {funnelData.map((item, index) => {
+                const button = (
+                  <Button variant="outline" size="sm" className="w-full" onClick={() => handleToggleDetails(index)}>
+                    <ChevronDown
+                      className={`mr-2 h-4 w-4 shrink-0 transition-transform duration-200 ${
+                        selectedStepIndex === index ? "rotate-180" : ""
+                      }`}
+                    />
+                    Details
+                  </Button>
+                );
+
                 if (index === 0) {
                   return (
                     <div key="watch-first" className="p-4 border-r flex flex-col justify-end">
-                      <StepDetails microSteps={item.microSteps} />
+                      {button}
                     </div>
                   )
                 }
@@ -182,7 +199,7 @@ export function PurchaseFunnelChart() {
                         <div className="text-xl font-bold text-green-500">{finalConversionRate.toFixed(1)}%</div>
                         <div className="text-xs text-muted-foreground">({finalValue.toLocaleString()})</div>
                       </div>
-                      <StepDetails microSteps={item.microSteps} className="mt-4" />
+                      <div className="mt-4">{button}</div>
                     </div>
                   )
                 }
@@ -200,13 +217,22 @@ export function PurchaseFunnelChart() {
                       <div className="text-xl font-bold text-destructive">{dropOffPercent.toFixed(1)}%</div>
                       <div className="text-xs text-muted-foreground">({dropOff.toLocaleString()})</div>
                     </div>
-                    <StepDetails microSteps={item.microSteps} className="mt-4" />
+                    <div className="mt-4">{button}</div>
                   </div>
                 )
               })}
             </div>
           </div>
         </div>
+        
+        {selectedStepIndex !== null && (
+          <div className="mt-6">
+            <StepDetails 
+              microSteps={funnelData[selectedStepIndex].microSteps}
+              stepName={funnelData[selectedStepIndex].step}
+            />
+          </div>
+        )}
       </CardContent>
     </Card>
   );

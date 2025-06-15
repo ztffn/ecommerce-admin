@@ -1,12 +1,6 @@
 
 import React from "react";
 import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-import { Button } from "@/components/ui/button";
-import {
   Table,
   TableBody,
   TableCell,
@@ -14,8 +8,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ChevronDown, CheckCircle2, XCircle, ArrowDown } from "lucide-react";
+import { ArrowDown, CheckCircle2, XCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 type MicroStep = {
   id: string;
@@ -26,30 +21,22 @@ type MicroStep = {
 
 interface StepDetailsProps {
   microSteps: MicroStep[];
+  stepName: string;
   className?: string;
 }
 
-export function StepDetails({ microSteps, className }: StepDetailsProps) {
-  const [isOpen, setIsOpen] = React.useState(false);
+export function StepDetails({ microSteps, stepName, className }: StepDetailsProps) {
 
   if (!microSteps || microSteps.length === 0) {
     return null;
   }
 
   return (
-    <Collapsible open={isOpen} onOpenChange={setIsOpen} className={cn("w-full", className)}>
-      <CollapsibleTrigger asChild>
-        <Button variant="outline" size="sm" className="w-full">
-          <ChevronDown
-            className={`mr-2 h-4 w-4 shrink-0 transition-transform duration-200 ${
-              isOpen ? "rotate-180" : ""
-            }`}
-          />
-          Details
-        </Button>
-      </CollapsibleTrigger>
-      <CollapsibleContent className="mt-2 py-1">
-        <div className="border rounded-md">
+    <Card className={cn("w-full", className)}>
+        <CardHeader>
+            <CardTitle>Details for: {stepName}</CardTitle>
+        </CardHeader>
+        <CardContent>
             <Table>
             <TableHeader>
                 <TableRow>
@@ -93,8 +80,7 @@ export function StepDetails({ microSteps, className }: StepDetailsProps) {
                 })}
             </TableBody>
             </Table>
-        </div>
-      </CollapsibleContent>
-    </Collapsible>
+        </CardContent>
+    </Card>
   );
 }
