@@ -7,15 +7,54 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { ArrowDown, Check, Eye, Users, BarChart } from "lucide-react";
+import { ArrowDown, Check, Users, BarChart } from "lucide-react";
+import { StepDetails } from "./StepDetails";
 
 const funnelData = [
-  { step: "Visit", value: 8000 },
-  { step: "Photo Uploaded", value: 4500 },
-  { step: "Configurated", value: 2500 },
-  { step: "Added to Cart", value: 1200 },
-  { step: "Order Completed", value: 600 },
+  { 
+    step: "Visit", 
+    value: 8000,
+    microSteps: [
+      { id: 'landing_page_view', description: 'Homepage load', status: 'Completed' },
+      { id: 'cta_try_photo_clicked', description: '“Try your photo” CTA', status: 'Completed' },
+    ]
+  },
+  { 
+    step: "Photo Uploaded", 
+    value: 4500,
+    microSteps: [
+      { id: 'upload_started', description: 'File picker / drag-drop', status: 'Completed' },
+      { id: 'photo_uploaded', description: 'Upload success', status: 'Completed' },
+    ]
+  },
+  { 
+    step: "Configurated", 
+    value: 2500,
+    microSteps: [
+      { id: 'configure_opened', description: 'Configurator rendered', status: 'Completed' },
+      { id: 'filter_applied', description: 'Filter confirm', status: 'Completed' },
+      { id: 'size_or_frame_changed', description: 'Size / frame selector', status: 'Failed' },
+      { id: 'entered_ar_preview', description: 'AR modal open / close', status: 'Completed' },
+    ]
+  },
+  { 
+    step: "Added to Cart", 
+    value: 1200,
+    microSteps: [
+      { id: 'added_to_cart', description: '“Add to cart” click', status: 'Completed' },
+      { id: 'checkout_started', description: 'Stripe session created', status: 'Completed' },
+      { id: 'payment_method_entered', description: 'Card/Apple Pay page', status: 'Failed' },
+      { id: 'shipping_submitted', description: 'Address confirmed', status: 'Completed' },
+    ]
+  },
+  { 
+    step: "Order Completed", 
+    value: 600,
+    microSteps: [
+      { id: 'payment_failed', description: 'Charge declined', status: 'Failed' },
+      { id: 'order_completed', description: 'Stripe webhook success', status: 'Completed' },
+    ]
+  },
 ];
 
 export function PurchaseFunnelChart() {
@@ -111,10 +150,8 @@ export function PurchaseFunnelChart() {
               {funnelData.map((item, index) => {
                 if (index === 0) {
                   return (
-                    <div key="watch-first" className="p-4 border-r">
-                      <Button variant="outline" size="sm" className="w-full">
-                        <Eye className="mr-2 h-4 w-4" /> Watch
-                      </Button>
+                    <div key="watch-first" className="p-4 border-r flex flex-col justify-end">
+                      <StepDetails microSteps={item.microSteps} />
                     </div>
                   )
                 }
@@ -133,9 +170,7 @@ export function PurchaseFunnelChart() {
                         <div className="text-xl font-bold text-green-500">{finalConversionRate.toFixed(1)}%</div>
                         <div className="text-xs text-muted-foreground">({finalValue.toLocaleString()})</div>
                       </div>
-                      <Button variant="outline" size="sm" className="mt-4 w-full">
-                        <Eye className="mr-2 h-4 w-4" /> Watch
-                      </Button>
+                      <StepDetails microSteps={item.microSteps} className="mt-4" />
                     </div>
                   )
                 }
@@ -153,9 +188,7 @@ export function PurchaseFunnelChart() {
                       <div className="text-xl font-bold text-destructive">{dropOffPercent.toFixed(1)}%</div>
                       <div className="text-xs text-muted-foreground">({dropOff.toLocaleString()})</div>
                     </div>
-                    <Button variant="outline" size="sm" className="mt-4 w-full">
-                      <Eye className="mr-2 h-4 w-4" /> Watch
-                    </Button>
+                    <StepDetails microSteps={item.microSteps} className="mt-4" />
                   </div>
                 )
               })}
