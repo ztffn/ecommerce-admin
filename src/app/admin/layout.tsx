@@ -1,5 +1,9 @@
 
-import { Outlet, Link, useLocation } from "react-router-dom";
+'use client'
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { ReactNode } from "react";
 import {
   Home,
   Package,
@@ -27,8 +31,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-export default function AdminLayout() {
-  const location = useLocation();
+export default function AdminLayout({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
 
   const navLinks = [
     { to: "/admin/overview", icon: Home, text: "Overview" },
@@ -37,10 +41,16 @@ export default function AdminLayout() {
     { to: "/admin/orders", icon: ShoppingCart, text: "Orders", badge: "6" },
     { to: "/admin/products", icon: Package, text: "Products" },
     { to: "/admin/customers", icon: Users, text: "Customers" },
-    { to: "#", icon: LineChart, text: "Analytics" },
+    { to: "/analytics", icon: LineChart, text: "Analytics" },
   ];
 
-  const isActive = (path: string) => location.pathname.startsWith(path);
+  const isActive = (path: string) => {
+    // Special case for overview to not match all other /admin/* routes
+    if (path === '/admin/overview') {
+      return pathname === path;
+    }
+    return pathname.startsWith(path);
+  };
 
   return (
     <div className="grid min-h-screen w-full grid-cols-[80px_1fr]">
@@ -48,7 +58,7 @@ export default function AdminLayout() {
         <div className="flex h-full max-h-screen flex-col gap-2">
           <div className="flex h-14 items-center justify-center border-b lg:h-[60px]">
             <Link
-              to="/admin"
+              href="/admin"
               className="flex items-center justify-center gap-2 font-semibold"
             >
               <Package className="h-6 w-6" />
@@ -61,7 +71,7 @@ export default function AdminLayout() {
                 <Tooltip key={link.text}>
                   <TooltipTrigger asChild>
                     <Link
-                      to={link.to}
+                      href={link.to}
                       className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-primary ${
                         isActive(link.to)
                           ? "bg-accent text-accent-foreground"
@@ -106,7 +116,7 @@ export default function AdminLayout() {
           </Button>
         </header>
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-          <Outlet />
+          {children}
         </main>
       </div>
     </div>
