@@ -33,7 +33,7 @@ export default function AdminLayout() {
     { to: "/admin/overview", icon: Home, text: "Overview" },
     { to: "/admin/funnels", icon: Filter, text: "Funnels" },
     { to: "/admin/roas", icon: DollarSign, text: "ROAS" },
-    { to: "#", icon: ShoppingCart, text: "Orders", badge: "6" },
+    { to: "/admin/orders", icon: ShoppingCart, text: "Orders", badge: "6" },
     { to: "#", icon: Package, text: "Products" },
     { to: "#", icon: Users, text: "Customers" },
     { to: "#", icon: LineChart, text: "Analytics" },

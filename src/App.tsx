@@ -10,6 +10,7 @@ import AdminLayout from "./pages/admin/Layout";
 import AdminOverview from "./pages/admin/Overview";
 import AdminFunnels from "./pages/admin/Funnels";
 import AdminRoas from "./pages/admin/Roas";
+import AdminOrders from "./pages/admin/Orders";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ const App = () => (
             <Route path="overview" element={<AdminOverview />} />
             <Route path="funnels" element={<AdminFunnels />} />
             <Route path="roas" element={<AdminRoas />} />
+            <Route path="orders" element={<AdminOrders />} />
           </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
