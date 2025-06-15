@@ -10,49 +10,61 @@ import {
 import { ArrowDown, Check, Users, BarChart } from "lucide-react";
 import { StepDetails } from "./StepDetails";
 
-const funnelData = [
+type FunnelStep = {
+    step: string;
+    value: number;
+    microSteps: {
+        id: string;
+        description: string;
+        status: 'Completed' | 'Failed';
+        value: number;
+    }[];
+};
+
+const funnelData: FunnelStep[] = [
   { 
     step: "Visit", 
     value: 8000,
     microSteps: [
-      { id: 'landing_page_view', description: 'Homepage load', status: 'Completed' },
-      { id: 'cta_try_photo_clicked', description: '“Try your photo” CTA', status: 'Completed' },
+      { id: 'landing_page_view', description: 'Homepage load', status: 'Completed', value: 8000 },
+      { id: 'cta_try_photo_clicked', description: '“Try your photo” CTA', status: 'Completed', value: 4500 },
     ]
   },
   { 
     step: "Photo Uploaded", 
     value: 4500,
     microSteps: [
-      { id: 'upload_started', description: 'File picker / drag-drop', status: 'Completed' },
-      { id: 'photo_uploaded', description: 'Upload success', status: 'Completed' },
+      { id: 'upload_started', description: 'File picker / drag-drop', status: 'Completed', value: 4500 },
+      { id: 'photo_uploaded', description: 'Upload success', status: 'Completed', value: 2500 },
     ]
   },
   { 
     step: "Configurated", 
     value: 2500,
     microSteps: [
-      { id: 'configure_opened', description: 'Configurator rendered', status: 'Completed' },
-      { id: 'filter_applied', description: 'Filter confirm', status: 'Completed' },
-      { id: 'size_or_frame_changed', description: 'Size / frame selector', status: 'Failed' },
-      { id: 'entered_ar_preview', description: 'AR modal open / close', status: 'Completed' },
+      { id: 'configure_opened', description: 'Configurator rendered', status: 'Completed', value: 2500 },
+      { id: 'filter_applied', description: 'Filter confirm', status: 'Completed', value: 2450 },
+      { id: 'size_or_frame_changed', description: 'Size / frame selector', status: 'Failed', value: 1800 },
+      { id: 'entered_ar_preview', description: 'AR modal open / close', status: 'Completed', value: 1200 },
     ]
   },
   { 
     step: "Added to Cart", 
     value: 1200,
     microSteps: [
-      { id: 'added_to_cart', description: '“Add to cart” click', status: 'Completed' },
-      { id: 'checkout_started', description: 'Stripe session created', status: 'Completed' },
-      { id: 'payment_method_entered', description: 'Card/Apple Pay page', status: 'Failed' },
-      { id: 'shipping_submitted', description: 'Address confirmed', status: 'Completed' },
+      { id: 'added_to_cart', description: '“Add to cart” click', status: 'Completed', value: 1200 },
+      { id: 'checkout_started', description: 'Stripe session created', status: 'Completed', value: 1100 },
+      { id: 'payment_method_entered', description: 'Card/Apple Pay page', status: 'Failed', value: 900 },
+      { id: 'shipping_submitted', description: 'Address confirmed', status: 'Completed', value: 600 },
     ]
   },
   { 
     step: "Order Completed", 
     value: 600,
     microSteps: [
-      { id: 'payment_failed', description: 'Charge declined', status: 'Failed' },
-      { id: 'order_completed', description: 'Stripe webhook success', status: 'Completed' },
+      { id: 'payment_attempted', description: 'Payment Initiated', status: 'Completed', value: 600 },
+      { id: 'payment_failed', description: 'Charge declined', status: 'Failed', value: 550 },
+      { id: 'order_completed', description: 'Stripe webhook success', status: 'Completed', value: 550 },
     ]
   },
 ];
