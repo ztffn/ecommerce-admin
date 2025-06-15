@@ -1,4 +1,3 @@
-
 import { CongratulationsCard } from "@/components/admin/CongratulationsCard";
 import { OverviewChart } from "@/components/admin/OverviewChart";
 import { RecentOrders } from "@/components/admin/RecentOrders";
@@ -20,7 +19,20 @@ const generateTrendData = () => {
 const revenueData = generateTrendData();
 const salesData = generateTrendData();
 const customersData = generateTrendData();
-const returningRateData = generateTrendData();
+
+const returningRateData = [
+  { name: "Jan", value: 86.5 },
+  { name: "Feb", value: 88.2 },
+  { name: "Mar", value: 87.0 },
+  { name: "Apr", value: 89.1 },
+  { name: "May", value: 87.8 },
+  { name: "Jun", value: 88.5 },
+  { name: "Jul", value: 90.1 },
+  { name: "Aug", value: 89.7 },
+  { name: "Sep", value: 87.5 },
+  { name: "Oct", value: 88.9 },
+];
+
 
 export default function AdminOverview() {
   return (
@@ -60,6 +72,9 @@ export default function AdminOverview() {
           description="+2.5% from last month"
           icon={TrendingUp}
           data={returningRateData}
+          showXAxis={true}
+          showYAxis={true}
+          yAxisFormatter={(value) => `${value}%`}
         />
       </div>
 

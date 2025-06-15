@@ -1,7 +1,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LucideIcon } from "lucide-react";
-import { Area, AreaChart, ResponsiveContainer, Tooltip } from "recharts";
+import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 type TrendCardProps = {
   title: string;
@@ -9,9 +9,12 @@ type TrendCardProps = {
   description: string;
   icon: LucideIcon;
   data: { name: string; value: number }[];
+  showXAxis?: boolean;
+  showYAxis?: boolean;
+  yAxisFormatter?: (value: any) => string;
 };
 
-export function TrendCard({ title, amount, description, icon: Icon, data }: TrendCardProps) {
+export function TrendCard({ title, amount, description, icon: Icon, data, showXAxis = false, showYAxis = false, yAxisFormatter }: TrendCardProps) {
   return (
     <Card className="flex flex-col">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -29,9 +32,9 @@ export function TrendCard({ title, amount, description, icon: Icon, data }: Tren
               data={data}
               margin={{
                 top: 5,
-                right: 0,
-                left: 0,
-                bottom: 0,
+                right: 10,
+                left: -10,
+                bottom: showXAxis ? 10 : 0,
               }}
             >
               <Tooltip
@@ -41,7 +44,7 @@ export function TrendCard({ title, amount, description, icon: Icon, data }: Tren
                     return (
                       <div className="rounded-lg border bg-background p-2 shadow-sm">
                         <div className="grid grid-cols-1 gap-1.5">
-                          <span className="text-sm font-bold">{payload[0].value}</span>
+                          <span className="text-sm font-bold">{yAxisFormatter ? yAxisFormatter(payload[0].value) : payload[0].value}</span>
                         </div>
                       </div>
                     );
@@ -49,6 +52,25 @@ export function TrendCard({ title, amount, description, icon: Icon, data }: Tren
                   return null;
                 }}
               />
+              {showXAxis && (
+                <XAxis
+                  dataKey="name"
+                  stroke="hsl(var(--muted-foreground))"
+                  fontSize={12}
+                  tickLine={false}
+                  axisLine={false}
+                />
+              )}
+              {showYAxis && (
+                <YAxis
+                  stroke="hsl(var(--muted-foreground))"
+                  fontSize={12}
+                  tickLine={false}
+                  axisLine={false}
+                  tickFormatter={yAxisFormatter}
+                  width={35}
+                />
+              )}
               <Area
                 type="monotone"
                 dataKey="value"
