@@ -3,6 +3,7 @@ import { CongratulationsCard } from "@/components/admin/CongratulationsCard";
 import { KpiCard } from "@/components/admin/KpiCard";
 import { OverviewChart } from "@/components/admin/OverviewChart";
 import { RecentOrders } from "@/components/admin/RecentOrders";
+import { PurchaseFunnelChart } from "@/components/admin/PurchaseFunnelChart";
 import { DollarSign, Users, CreditCard } from "lucide-react";
 
 export default function AdminOverview() {
@@ -29,11 +30,14 @@ export default function AdminOverview() {
           icon={Users}
         />
       </div>
-      <div className="grid grid-cols-1 gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
-        <div className="xl:col-span-2">
+      <div className="grid grid-cols-1 gap-4 md:gap-8 lg:grid-cols-3">
+        <div className="lg:col-span-2">
             <OverviewChart />
         </div>
-        <RecentOrders />
+        <div className="space-y-4 md:space-y-8">
+            <RecentOrders />
+            <PurchaseFunnelChart />
+        </div>
       </div>
     </>
   );
