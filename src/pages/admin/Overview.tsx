@@ -34,7 +34,15 @@ export default function AdminOverview() {
             description: "from last month"
           }}
           icon={DollarSign}
-        />
+        >
+          <div className="mt-4">
+            <TimePeriodSelector 
+              value={selectedPeriod}
+              onValueChange={setSelectedPeriod}
+              periods={timePeriods}
+            />
+          </div>
+        </MetricCard>
         <MetricCard
           title="New Customers"
           value="3,602"
@@ -66,18 +74,13 @@ export default function AdminOverview() {
               <h3 className="text-lg font-semibold">Revenue Overview</h3>
               <p className="text-sm text-muted-foreground">Total revenue over time</p>
             </div>
-            <TimePeriodSelector 
-              value={selectedPeriod}
-              onValueChange={setSelectedPeriod}
-              periods={timePeriods}
-            />
           </div>
           <OverviewChart />
         </div>
         <MetricCard
           title="Growth Rate"
           value="4.5%"
-          description="Steady performance increase"
+          description="Steady performance increase" 
           trend={{
             value: "+2.1%",
             isPositive: true,
