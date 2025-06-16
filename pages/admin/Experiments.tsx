@@ -1,4 +1,3 @@
-
 import { ExperimentManager } from "@/components/admin/ExperimentManager";
 
 export default function AdminExperiments() {

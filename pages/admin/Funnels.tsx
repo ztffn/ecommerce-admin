@@ -1,4 +1,3 @@
-
 import { PurchaseFunnelChart } from "@/components/admin/PurchaseFunnelChart";
 
 export default function AdminFunnels() {

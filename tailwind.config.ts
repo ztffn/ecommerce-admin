@@ -3,10 +3,10 @@ import type { Config } from "tailwindcss";
 export default {
 	darkMode: ["class"],
 	content: [
-		"./pages/**/*.{ts,tsx}",
-		"./components/**/*.{ts,tsx}",
-		"./app/**/*.{ts,tsx}",
-		"./src/**/*.{ts,tsx}",
+		'./pages/**/*.{js,ts,jsx,tsx,mdx}',
+		'./src/components/**/*.{js,ts,jsx,tsx,mdx}', // More specific path
+		'./app/**/*.{js,ts,jsx,tsx,mdx}',      // For Next.js App Router
+		'./src/**/*.{js,ts,jsx,tsx,mdx}',        // General catch-all for src
 	],
 	prefix: "",
 	theme: {
