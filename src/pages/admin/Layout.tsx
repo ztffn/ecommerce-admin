@@ -39,7 +39,7 @@ export default function AdminLayout() {
     { to: "/admin/products", icon: Package, text: "Products" },
     { to: "/admin/customers", icon: Users, text: "Customers" },
     { to: "/admin/experiments", icon: TestTube, text: "A/B Tests" },
-    { to: "#", icon: LineChart, text: "Analytics" },
+    { to: "/admin/analytics", icon: LineChart, text: "Analytics" },
   ];
 
   const isActive = (path: string) => location.pathname.startsWith(path);
