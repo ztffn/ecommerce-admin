@@ -1,5 +1,5 @@
 
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useExperiment } from "@/hooks/useExperiment";
 
@@ -24,7 +24,7 @@ const Index = () => {
           ad spend, product performance, and profit margins.
         </p>
         <Button asChild size="lg" className={buttonClass} onClick={handleCTAClick}>
-          <Link to="/admin">{buttonText}</Link>
+          <Link href="/admin">{buttonText}</Link>
         </Button>
         {ctaExperiment.variant && (
           <p className="text-xs text-muted-foreground mt-4">

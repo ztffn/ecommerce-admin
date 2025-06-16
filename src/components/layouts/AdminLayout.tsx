@@ -1,5 +1,5 @@
-
-import { Outlet, Link, useLocation } from "react-router-dom";
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import {
   Home,
   Package,
@@ -13,7 +13,8 @@ import {
   TestTube,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+// Badge is not used in the provided code, so I'm commenting it out.
+// import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,22 +28,27 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import React from 'react';
 
-export default function AdminLayout() {
-  const location = useLocation();
+interface AdminLayoutProps {
+  children: React.ReactNode;
+}
+
+export default function AdminLayout({ children }: AdminLayoutProps) {
+  const router = useRouter();
 
   const navLinks = [
-    { to: "/admin/overview", icon: Home, text: "Overview" },
-    { to: "/admin/funnels", icon: Filter, text: "Funnels" },
-    { to: "/admin/roas", icon: DollarSign, text: "ROAS" },
-    { to: "/admin/orders", icon: ShoppingCart, text: "Orders", badge: "6" },
-    { to: "/admin/products", icon: Package, text: "Products" },
-    { to: "/admin/customers", icon: Users, text: "Customers" },
-    { to: "/admin/experiments", icon: TestTube, text: "A/B Tests" },
-    { to: "/admin/analytics", icon: LineChart, text: "Analytics" },
+    { href: "/admin/overview", icon: Home, text: "Overview" },
+    { href: "/admin/funnels", icon: Filter, text: "Funnels" },
+    { href: "/admin/roas", icon: DollarSign, text: "ROAS" },
+    { href: "/admin/orders", icon: ShoppingCart, text: "Orders" }, // Removed badge: "6" as it's not directly supported without state
+    { href: "/admin/products", icon: Package, text: "Products" },
+    { href: "/admin/customers", icon: Users, text: "Customers" },
+    { href: "/admin/experiments", icon: TestTube, text: "A/B Tests" },
+    { href: "/admin/analytics", icon: LineChart, text: "Analytics" },
   ];
 
-  const isActive = (path: string) => location.pathname.startsWith(path);
+  const isActive = (path: string) => router.pathname.startsWith(path);
 
   return (
     <div className="grid min-h-screen w-full grid-cols-[80px_1fr]">
@@ -50,7 +56,7 @@ export default function AdminLayout() {
         <div className="flex h-full max-h-screen flex-col gap-2">
           <div className="flex h-14 items-center justify-center border-b lg:h-[60px]">
             <Link
-              to="/admin"
+              href="/admin"
               className="flex items-center justify-center gap-2 font-semibold"
             >
               <Package className="h-6 w-6" />
@@ -63,9 +69,9 @@ export default function AdminLayout() {
                 <Tooltip key={link.text}>
                   <TooltipTrigger asChild>
                     <Link
-                      to={link.to}
+                      href={link.href}
                       className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-primary ${
-                        isActive(link.to)
+                        isActive(link.href)
                           ? "bg-accent text-accent-foreground"
                           : "text-muted-foreground"
                       }`}
@@ -108,7 +114,7 @@ export default function AdminLayout() {
           </Button>
         </header>
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-          <Outlet />
+          {children}
         </main>
       </div>
     </div>
